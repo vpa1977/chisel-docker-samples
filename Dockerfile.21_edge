@@ -1,0 +1,15 @@
+# Dockerfile sample for chiselled JRE 11, 17, 21
+
+from ubuntu:24.04 as builder
+
+RUN apt-get install -y -U ca-certificates-java default-jre-headless
+
+# install certificate globally
+COPY mycert.pem /usr/local/share/ca-certificates/mycert.crt
+RUN update-ca-certificates
+
+from ubuntu/jre:21-24.04_stable
+ARG TARGETARCH=amd64
+
+# copy Java certificate store
+COPY --from=builder /etc/ssl/certs/java/cacerts /usr/lib/jvm/java-21-openjdk-${TARGETARCH}/lib/security/

@@ -1,0 +1,15 @@
+# Dockerfile sample for chiselled JRE 8
+
+from ubuntu:22.04 as builder
+
+RUN apt-get update && apt-get install -y ca-certificates-java default-jre-headless
+
+# install certificate globally
+COPY mycert.pem /usr/local/share/ca-certificates/mycert.crt
+RUN update-ca-certificates
+
+from ubuntu/jre:8-22.04_edge
+ARG TARGETARCH=amd64
+
+# copy Java certificate store
+COPY --from=builder /etc/ssl/certs/java/cacerts /etc/ssl/certs/java/cacerts
