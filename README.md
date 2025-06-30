@@ -4,7 +4,7 @@ This repository provides sample Dockerfiles demonstrating how to install a custo
 
 ## How to Build the Samples
 
-To build the sample images, run the following [docker build](httpss://docs.docker.com/engine/reference/commandline/build/) commands from your terminal:
+To build the sample images, run the following commands from your terminal:
 
 ### For the chiselled JRE 8
 
